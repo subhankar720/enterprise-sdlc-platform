@@ -1,0 +1,31 @@
+[project]
+name = "project-contract"
+version = "0.1.0"
+description = "Shared project metadata validation contract"
+requires-python = ">=3.11"
+dependencies = [
+    "jsonschema>=4.22,<5.0",
+]
+
+[dependency-groups]
+dev = [
+    "hatchling>=1.27,<2.0",
+    "mypy>=1.15,<2.0",
+    "pytest>=8.3,<9.0",
+    "ruff>=0.11,<1.0",
+    "types-jsonschema>=4.26,<5.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.27,<2.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/project_contract"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/project_contract/project-metadata.schema.json" = "project_contract/project-metadata.schema.json"
+"src/project_contract/py.typed" = "project_contract/py.typed"
+
+[tool.ruff.lint.isort]
+known-first-party = ["project_contract"]

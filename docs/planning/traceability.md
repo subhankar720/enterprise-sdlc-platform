@@ -9,7 +9,7 @@
 | 0 | EPIC-monorepo-foundation | F-monorepo-foundation-003 | S-monorepo-foundation-003 | GitHub organization and ownership | Pending | Pending | Pending | Pending |
 | 0 | EPIC-monorepo-foundation | F-monorepo-foundation-004 | S-monorepo-foundation-004 | Charter and skills catalog | Pending | In progress: docs | Link and section audit | Pending |
 | 0 | EPIC-monorepo-foundation | F-monorepo-foundation-005 | S-monorepo-foundation-005 | Python FastAPI local slice; graph and Python targets | Pending | [Service project](../../apps/backend/fastapi-service/project.json) | Locked uv sync; Nx build/lint/typecheck/test; explicit-file affected test selection; HTTP `/healthz` | Pending |
-| 1 | EPIC-polyglot-build | F-polyglot-build-001 | S-polyglot-build-001 | Foundation F-001/002 | Pending | Pending | Pending | Pending |
+| 1 | EPIC-polyglot-build | F-polyglot-build-001 | S-polyglot-build-001 | Foundation F-001/002 | [Metadata contract](../../platform/python/project-contract/README.md) | [Python graph fixture](../../teams/example/README.md) | Platform change selects contract, shared library, and transitive service tests; local PR report links logs | Pending |
 | 1 | EPIC-polyglot-build | F-polyglot-build-002 | S-polyglot-build-002 | Graph; language toolchains | Pending | Pending | Pending | Pending |
 | 1 | EPIC-polyglot-build | F-polyglot-build-003 | S-polyglot-build-003 | Graph and native targets; A-010 for remote cache | Pending | Pending | Pending | Pending |
 | 1 | EPIC-polyglot-build | F-polyglot-build-004 | S-polyglot-build-004 | Graph, targets, affected tests | Pending | Pending | Pending | Pending |

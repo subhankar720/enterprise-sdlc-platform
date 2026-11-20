@@ -12,16 +12,20 @@ branch/base refs, and affected consumers before changing graph behavior.
 
 ## Current repository readiness
 
-At the last local check, Nx v24.0.6 is pinned locally and `nx show projects`
-discovers `python-fastapi-service`. Its build, lint, typecheck, and test targets
-passed. The service's local HTTP health route returned the expected payload. The
-Go plugin reference was removed until a plugin implementation exists.
+At the last local check, Nx v24.0.6 is pinned locally and discovers four
+projects. The original FastAPI project and the three-project Python graph proof
+pass build, lint, typecheck, and test. Changing the platform contract selects
+the shared library and service transitively; `pnpm pr:local` records final
+statuses and per-project logs. The Go plugin reference was removed until a
+plugin implementation exists.
 
-Affected calculation remains **unvalidated** because the repository has no
-commits or base/head history. `nx.json` uses the observed branch name `master`;
-update it if the repository's default branch changes. Do not use global Nx as
-proof that the project-pinned configuration works. See the
-[toolchain readiness snapshot](toolchain-readiness.md).
+The repository has a base commit. Both explicit-file selection and a
+Git-base-based affected run have been validated; the platform source change
+selected three projects and excluded the unrelated FastAPI pilot. Recheck
+base/head behavior whenever the default branch or merge strategy changes.
+`nx.json` uses the observed branch name `master`; update it if the repository's
+default branch changes. Do not use global Nx as proof that the project-pinned
+configuration works. See the [toolchain readiness snapshot](toolchain-readiness.md).
 
 ## Checklist
 
@@ -49,18 +53,20 @@ pnpm exec nx show projects
 pnpm exec nx graph
 pnpm exec nx show project <project-name> --json
 pnpm exec nx affected -t test --base=<valid-base-ref> --head=<valid-head-ref>
+pnpm pr:local -- --files=platform/python/project-contract/src/project_contract/metadata.py
 ```
 
 Use the repository-pinned pnpm/Nx versions. Do not hardcode `main` or
-`origin/main`; choose refs that exist in the current repository. With no commit
-history, affected detection cannot be validated yet.
+`origin/main`; choose refs that exist in the current repository. Use explicit
+`--files` inputs to isolate a graph case and valid base/head refs to validate
+Git-diff behavior.
 
 ## Remaining configuration gaps
 
 - Nx's repository version and `nx.json` schema must be validated again whenever
   either changes.
 - `defaultBase: "master"` is only valid while that remains the actual base branch.
-- Affected behavior needs a base commit and fixtures before it can be validated.
+- Cross-language edges, cycle validation, and global-file impact remain to be tested.
 - The remote cache provider is not approved for the local-only prototype. Keep
   local cache separate from remote cache.
 - Root task defaults must distinguish local deterministic image construction

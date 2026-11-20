@@ -37,4 +37,6 @@ Validated with `uv sync --all-packages --locked`, uncached Nx
 build/lint/typecheck/test, `nx affected --target=test` with the service source
 passed via `--files`, and an HTTP request to
 `http://127.0.0.1:18765/healthz`. Git-diff-based affected calculation remains
-unvalidated until the repository has a base commit.
+validated against the initial commit with
+`nx affected --target=test --base=fe0ee77`; explicit-file selection also
+isolates the service's relevant validation targets.

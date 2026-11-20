@@ -1,0 +1,48 @@
+{
+  "name": "example-service",
+  "projectType": "application",
+  "tags": ["team:example", "language:python", "product-type:service"],
+  "implicitDependencies": ["example-shared"],
+  "metadata": {
+    "contractVersion": 1,
+    "team": "example",
+    "projectId": "example-service",
+    "productType": "service",
+    "language": "python",
+    "toolchainProfile": "python-local",
+    "release": {
+      "versioning": "semver",
+      "artifactProfile": "python-native"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv build --package example-service --out-dir dist",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package example-service pytest tests -ra --strict-markers",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package example-service ruff check src tests",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package example-service mypy src",
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

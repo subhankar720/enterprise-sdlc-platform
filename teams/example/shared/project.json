@@ -1,0 +1,48 @@
+{
+  "name": "example-shared",
+  "projectType": "library",
+  "tags": ["team:example", "language:python", "product-type:library"],
+  "implicitDependencies": ["project-contract"],
+  "metadata": {
+    "contractVersion": 1,
+    "team": "example",
+    "projectId": "example-shared",
+    "productType": "library",
+    "language": "python",
+    "toolchainProfile": "python-local",
+    "release": {
+      "versioning": "semver",
+      "artifactProfile": "python-wheel"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv build --package example-shared --out-dir dist",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package example-shared pytest tests -ra --strict-markers",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package example-shared ruff check src tests",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package example-shared mypy src",
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

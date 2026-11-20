@@ -6,7 +6,8 @@ Planning artifacts use a traceable hierarchy:
 Epic -> Feature -> Story -> ADR/Contract -> Implementation -> Test -> Release
 ```
 
-Start with the proposed [implementation roadmap](roadmap.md) and review
+Start with the proposed [implementation roadmap](roadmap.md), review the
+[team-oriented platform vision](vision.md), and check
 [unresolved assumptions](assumptions.md) before approving work. The
 [standard charter](../standard-charter.md) governs the lifecycle and quality bar.
 
@@ -17,6 +18,7 @@ Start with the proposed [implementation roadmap](roadmap.md) and review
 - `stories/S-<epic>-<number>.md`
 - `traceability.md`
 - `roadmap.md`
+- `vision.md`
 - `assumptions.md`
 - `templates/` for reusable planning records
 

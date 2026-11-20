@@ -13,7 +13,13 @@ authors = [
 package = false
 
 [tool.uv.workspace]
-members = ["apps/backend/*", "shared-libs/python/*", "tools/python/*"]
+members = [
+    "apps/backend/*",
+    "platform/python/*",
+    "shared-libs/python/*",
+    "teams/*/*",
+    "tools/python/*",
+]
 
 [tool.uv.sources]
 # Workspace members resolve via uv workspace protocol.

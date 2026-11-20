@@ -18,6 +18,7 @@ cross-language build orchestrator and native toolchains for each language.
 The architecture principles and implementation requirements are documented in:
 
 - [Enterprise SDLC Standard Charter](docs/standard-charter.md)
+- [Team-oriented, local-first platform vision](docs/planning/vision.md)
 - [Implementation roadmap](docs/planning/roadmap.md)
 - [Planning assumptions and open decisions](docs/planning/assumptions.md)
 
@@ -53,12 +54,13 @@ process. Skills must not silently add requirements that are absent from the char
 7. Release with rollback and traceability.
 8. Operate with SLOs, alerts, dashboards, and runbooks.
 
-## Initial directory intent
+## Current and target layout
 
 ```text
-apps/             Deployable applications
-shared-libs/      Reusable libraries
-platform/         Developer platform and golden paths
+teams/<team>/     Target home for team-owned projects
+platform/         Shared developer platform and golden paths
+apps/             Current local pilot (migration is separate work)
+shared-libs/      Cross-team reusable libraries, when justified
 infra/            Infrastructure as code
 helm/             Kubernetes application charts
 gitops/           GitOps applications and environment promotion
@@ -79,6 +81,15 @@ The initial learning service is
 [apps/backend/fastapi-service](apps/backend/fastapi-service/README.md). It
 exposes `GET /healthz` on localhost and uses Nx targets for build, lint,
 typecheck, test, and serve. It requires no cloud account or external credentials.
+
+The local team-graph proof is documented in
+[teams/example](teams/example/README.md). Run its change-impact test report with:
+
+```powershell
+pnpm pr:local -- --files=platform/python/project-contract/src/project_contract/metadata.py
+```
+
+Reports and per-project logs stay under the ignored `.local-reports/` directory.
 
 ## Working with the repository
 

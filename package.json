@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@12.21.0",
+  "scripts": {
+    "pr:local": "node scripts/local-pr-report.mjs"
+  },
   "devDependencies": {
     "nx": "24.0.6"
   }

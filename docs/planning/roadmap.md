@@ -13,16 +13,17 @@ team capacity, provider decisions, and validated acceptance criteria.
 | Phase | Outcome | Epics | Exit evidence |
 |---|---|---|---|
 | 0. Standards and foundation | Approved backlog, governed workspaces, ownership, baseline tooling | `EPIC-monorepo-foundation` | Nx lists the local FastAPI project; uv resolves its workspace; build/lint/typecheck/test and `/healthz` pass locally |
-| 1. Polyglot graph and CI | Reliable cross-language graph, affected builds, secure CI | `EPIC-polyglot-build`, `EPIC-secure-delivery` | Dependency edges and affected sets tested; merge gate and security checks operate |
-| 2. Runtime and deployment platform | Reproducible containers, infrastructure baseline, GitOps delivery | `EPIC-runtime-platform` | Immutable artifact is promoted to a non-production environment through GitOps and can be rolled back |
+| 1. Polyglot graph and CI | Team-owned projects, transitive impact analysis, transparent local-first PR checks | `EPIC-polyglot-build`, `EPIC-secure-delivery` | Direct and transitive affected sets are tested; CI evidence explains selected, blocked, and skipped scopes |
+| 2. Runtime and deployment platform | Project-type release artifacts and optional platform-built OCI images, with GitOps desired state | `EPIC-runtime-platform` | Local artifact and GitOps workflows are reproducible; any cloud environment is separately justified and approved |
 | 3. Reliability and operations | Service telemetry, SLOs, alerting, runbooks, incident feedback | `EPIC-observability-reliability` | A vertical-slice service has dashboards, actionable alerts, SLO evidence, and exercised recovery |
 | 4. Developer experience | Catalog, golden paths, standard local environment | `EPIC-developer-experience` | A team can scaffold and operate a governed service using the approved golden path |
 | 5. Release governance | Reproducible versioning, approvals, provenance, promotion and rollback evidence | `EPIC-release-governance` | A release can be reconstructed from source, evidence, and artifact digests |
 
 Within Phase 1, repository governance and graph work can proceed in parallel only
 where the listed feature dependencies allow.
-Runtime provider-specific work is blocked until the provider decision is resolved.
-Production enablement is explicitly outside the first vertical slice.
+Runtime provider-specific work is blocked until a concrete need and provider
+decision are resolved. Cloud is not the default path; production enablement is
+explicitly outside the first vertical slice.
 
 ## Epic inventory
 
@@ -57,17 +58,22 @@ Detailed feature dependencies are recorded in each feature file and summarized i
 
 The first vertical slice must remain deliberately small:
 
-1. Choose one application language and one service with the team.
-2. Register it and its direct shared dependencies in Nx.
-3. Build, test, lint, scan, and package it in CI.
-4. Run it locally; defer environment deployment until the provider and runtime
-   decisions are made.
-5. Emit health and telemetry signals and demonstrate local recovery behavior.
-6. Document measured gaps before expanding language or service coverage.
+1. Define the team/project descriptor and ownership contract.
+2. Register a representative project and its direct and transitive shared
+   dependencies in Nx.
+3. Run focused build and test tasks locally and expose their scope and evidence.
+4. Validate project release artifacts locally; keep OCI packaging opt-in and
+   platform-owned.
+5. Keep desired environment state in Git; defer environment deployment until a
+   local or approved runtime is in scope.
+6. Document measured gaps before adding hosted services, cloud, or more language
+   and service coverage.
 
-For the current personal prototype, the selected first slice is a minimal Python
-FastAPI service running locally. This selection does not approve external
-credentials, cloud resources, customer data, or production deployment.
+For the current personal prototype, the first slice is a minimal Python FastAPI
+service running locally. It proves a basic project loop, not the team layout,
+transitive graph, release profiles, GitOps, PR evidence portal, or AI approvals.
+This selection does not approve external credentials, cloud resources, customer
+data, or production deployment.
 
 Do not build all languages, all environments, or a full developer portal before
 this slice proves the architecture.

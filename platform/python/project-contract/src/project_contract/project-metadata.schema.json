@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Enterprise SDLC project metadata",
+  "type": "object",
+  "required": [
+    "contractVersion",
+    "team",
+    "projectId",
+    "productType",
+    "language",
+    "toolchainProfile",
+    "release"
+  ],
+  "properties": {
+    "contractVersion": {
+      "const": 1
+    },
+    "team": {
+      "type": "string",
+      "minLength": 1
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "productType": {
+      "enum": [
+        "application",
+        "service",
+        "library",
+        "cli",
+        "platform-capability"
+      ]
+    },
+    "language": {
+      "type": "string",
+      "minLength": 1
+    },
+    "toolchainProfile": {
+      "type": "string",
+      "minLength": 1
+    },
+    "release": {
+      "type": "object",
+      "required": [
+        "versioning",
+        "artifactProfile"
+      ],
+      "properties": {
+        "versioning": {
+          "const": "semver"
+        },
+        "artifactProfile": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "extensions": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

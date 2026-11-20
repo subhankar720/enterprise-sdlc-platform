@@ -32,11 +32,14 @@ until an ADR records and approves a change.
 8. **Requirements are traceable from backlog through operation.**
 9. **Platforms are delivered through golden paths and reusable templates.**
 10. **Operational readiness is a delivery requirement, not a post-release activity.**
+11. **Teams own projects; the shared platform provides governed, local-first defaults.**
 
 ## 3. Architecture model
 
 The repository is a polyglot monorepo with:
 
+- Team-owned projects grouped by team under `teams/<team>/<project>`
+- A shared `platform/` product for defaults, tooling, policies, and onboarding
 - Java and Kotlin services through Gradle
 - React or other TypeScript applications through pnpm
 - Python applications and libraries through uv
@@ -54,13 +57,17 @@ plugins, policies, templates, charts, or automation.
 
 ## 4. Repository structure
 
-Required top-level domains are:
+The target ownership layout groups team-owned projects by team. The current
+FastAPI pilot remains under `apps/` until a separately approved migration.
+Cross-cutting directories are created only when an approved deliverable needs
+them.
 
 ```text
 .github/          repository governance and workflows
-apps/             deployable applications
-shared-libs/      reusable libraries and cross-language schemas
-platform/         developer portal and golden paths
+teams/<team>/     team-owned applications, libraries, and modules
+platform/         shared catalogs, generators, policies, and golden paths
+apps/             current local pilot only; migrate through traceable work
+shared-libs/      cross-team libraries and schemas when justified
 infra/            infrastructure as code
 helm/             Kubernetes charts
 gitops/           Argo CD and environment definitions
@@ -183,6 +190,8 @@ Every governed project must declare:
 - Cross-project dependencies
 
 CI must use Nx affected detection rather than rebuilding the entire repository.
+When a project changes, affected validation includes its direct and transitive
+consumers through declared project dependencies.
 Global files such as workspace manifests, lockfiles, version catalogs, Nx
 configuration, and shared CI configuration must invalidate the correct project set.
 
@@ -201,6 +210,9 @@ Exceptions require a documented owner and reason.
 Dependabot or equivalent update automation must open scoped updates. Dependency
 updates require lockfile, license, vulnerability, compatibility, and affected-build
 validation.
+Projects use centrally maintained ecosystem defaults; deviations require an
+explicit, reviewed exception. Project manifests and native lock behavior remain
+the source of reproducible dependency resolution.
 
 ## 9. Security charter
 
@@ -246,7 +258,8 @@ CI pipelines must:
 - Run security gates
 - Produce immutable artifacts
 - Publish machine-readable validation evidence
-- Build containers only for changed deployables
+- Build OCI images only for changed deployables enrolled in the platform-owned
+  container profile
 - Register the CI gate as a branch-protection check
 - Never cache publish or deploy actions
 
@@ -255,7 +268,8 @@ minutes after the graph is mature.
 
 ## 12. Deployment and release standard
 
-- One immutable artifact is promoted across environments.
+- Immutable artifacts are promoted without rebuilding; each deployed artifact
+  is identified by its digest.
 - Production changes use GitOps.
 - Canary or progressive delivery is required for critical services.
 - Every deployment has health validation and rollback criteria.
@@ -270,7 +284,7 @@ Golden paths must enable a team to create a production-aligned service with:
 - Testing
 - CI/CD
 - Security baseline
-- Container packaging
+- Optional platform-built OCI packaging for enrolled services
 - Deployment configuration
 - Observability defaults
 - Ownership metadata

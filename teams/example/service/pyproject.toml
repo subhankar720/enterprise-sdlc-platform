@@ -1,0 +1,32 @@
+[project]
+name = "example-service"
+version = "0.1.0"
+description = "Example team service consuming its shared library"
+requires-python = ">=3.11"
+dependencies = [
+    "example-shared>=0.1.0",
+]
+
+[tool.uv.sources]
+example-shared = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "hatchling>=1.27,<2.0",
+    "mypy>=1.15,<2.0",
+    "pytest>=8.3,<9.0",
+    "ruff>=0.11,<1.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.27,<2.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/example_service"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"src/example_service/py.typed" = "example_service/py.typed"
+
+[tool.ruff.lint.isort]
+known-first-party = ["example_service"]

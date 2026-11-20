@@ -1,0 +1,47 @@
+{
+  "name": "project-contract",
+  "projectType": "library",
+  "tags": ["team:platform", "language:python", "product-type:platform-capability"],
+  "metadata": {
+    "contractVersion": 1,
+    "team": "platform",
+    "projectId": "project-contract",
+    "productType": "platform-capability",
+    "language": "python",
+    "toolchainProfile": "python-local",
+    "release": {
+      "versioning": "semver",
+      "artifactProfile": "python-wheel"
+    }
+  },
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv build --package project-contract --out-dir dist",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package project-contract pytest tests -ra --strict-markers",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package project-contract ruff check src tests",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package project-contract mypy src",
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

@@ -24,4 +24,10 @@ Foundation workspace and project descriptors.
 
 ## Test evidence
 
-Graph fixture tests for direct, transitive, cross-language, and circular edges.
+The local Python proof registers
+`example-service -> example-shared -> project-contract`. Changing the platform
+contract selects all three test targets; the local PR report records results,
+skips, and per-project logs.
+
+Cross-language edges, cycle detection, and global-file impact rules remain
+unvalidated. This is prototype evidence, not completion of the full story.
