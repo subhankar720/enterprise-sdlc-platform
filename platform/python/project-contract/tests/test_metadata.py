@@ -26,7 +26,7 @@ def test_invalid_metadata_reports_schema_path(tmp_path: Path) -> None:
         load_project_metadata(project_file)
 
 
-def test_project_id_must_match_nx_project_name(tmp_path: Path) -> None:
+def test_project_id_is_independent_of_nx_project_name(tmp_path: Path) -> None:
     project_file = tmp_path / "project.json"
     project_file.write_text(
         json.dumps(
@@ -35,7 +35,7 @@ def test_project_id_must_match_nx_project_name(tmp_path: Path) -> None:
                 "metadata": {
                     "contractVersion": 1,
                     "team": "example",
-                    "projectId": "example-project",
+                    "projectId": "feds/ors/etl",
                     "productType": "library",
                     "language": "python",
                     "toolchainProfile": "python-local",
@@ -49,5 +49,36 @@ def test_project_id_must_match_nx_project_name(tmp_path: Path) -> None:
         encoding="utf-8",
     )
 
-    with pytest.raises(ProjectMetadataError, match="must match the Nx project name"):
+    metadata = load_project_metadata(project_file)
+
+    assert metadata["projectId"] == "feds/ors/etl"
+
+
+@pytest.mark.parametrize("project_id", ["feds//etl", "feds/../etl", "/etl", "feds/"])
+def test_project_id_rejects_invalid_path_segments(
+    tmp_path: Path, project_id: str
+) -> None:
+    project_file = tmp_path / "project.json"
+    project_file.write_text(
+        json.dumps(
+            {
+                "name": "example",
+                "metadata": {
+                    "contractVersion": 1,
+                    "team": "example",
+                    "projectId": project_id,
+                    "productType": "library",
+                    "language": "python",
+                    "toolchainProfile": "python-local",
+                    "release": {
+                        "versioning": "semver",
+                        "artifactProfile": "python-wheel",
+                    },
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    with pytest.raises(ProjectMetadataError, match="projectId"):
         load_project_metadata(project_file)

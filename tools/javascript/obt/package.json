@@ -1,0 +1,12 @@
+{
+  "name": "@enterprise-sdlc-platform/obt",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "strato": "./src/cli.mjs"
+  },
+  "dependencies": {
+    "@cdktf/hcl2json": "0.21.0"
+  }
+}

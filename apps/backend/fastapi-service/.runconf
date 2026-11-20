@@ -1,0 +1,5 @@
+applications {
+  healthApi {
+    target = "serve"
+  }
+}

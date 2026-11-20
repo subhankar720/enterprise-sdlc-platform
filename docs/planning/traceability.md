@@ -13,6 +13,7 @@
 | 1 | EPIC-polyglot-build | F-polyglot-build-002 | S-polyglot-build-002 | Graph; language toolchains | Pending | Pending | Pending | Pending |
 | 1 | EPIC-polyglot-build | F-polyglot-build-003 | S-polyglot-build-003 | Graph and native targets; A-010 for remote cache | Pending | Pending | Pending | Pending |
 | 1 | EPIC-polyglot-build | F-polyglot-build-004 | S-polyglot-build-004 | Graph, targets, affected tests | Pending | Pending | Pending | Pending |
+| 1 | EPIC-polyglot-build | F-polyglot-build-005 | S-polyglot-build-005 | Graph, native targets, project descriptor; A-017 | [Metadata contract](../../platform/python/project-contract/README.md) | [OBT tool](../../tools/javascript/obt/README.md) | Seven OBT unit tests; CLI build/test; `/healthz` returns HTTP 200 through CLI run; metadata tests, Ruff, mypy pass | Pending |
 | 1 | EPIC-secure-delivery | F-secure-delivery-001 | S-secure-delivery-001 | GitHub; assigned teams | Pending | Pending | Pending | Pending |
 | 1 | EPIC-secure-delivery | F-secure-delivery-002 | S-secure-delivery-002 | Polyglot graph; A-002 | Pending | Pending | Pending | Pending |
 | 1 | EPIC-secure-delivery | F-secure-delivery-003 | S-secure-delivery-003 | CI gate; scanner and compliance decisions | Pending | Pending | Pending | Pending |

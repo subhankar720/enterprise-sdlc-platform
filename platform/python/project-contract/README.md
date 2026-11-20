@@ -1,9 +1,11 @@
 # Project Metadata Contract
 
 This local prototype validates the `metadata` object in an Nx `project.json`
-against the packaged JSON Schema. `metadata.projectId` must match the Nx project
-name. The schema covers team ownership, product type, language profile, and
-independent SemVer release metadata.
+against the packaged JSON Schema. `metadata.projectId` is the stable project
+identity and is independent of the Nx project name and folder location. It may
+use slash-separated segments, such as `feds/ors/etl`; the workspace resolver
+maps that identity to the Nx project. The schema covers team ownership, product
+type, language profile, and independent SemVer release metadata.
 
 The contract is versioned and intentionally small. It is a design proof, not yet
 the final organization-wide project descriptor standard.

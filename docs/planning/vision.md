@@ -37,7 +37,10 @@ traceable change.
 
 Project metadata should eventually identify ownership, project type, language
 profile, dependencies, build and test targets, release profile, and any approved
-exceptions. A version-1 schema is prototyped in the
+exceptions. Its `projectId` is the stable CLI identity, independent of the Nx
+project name and physical folder; Nx resolves that identity to the registered
+project. The sample ID `feds/ors/etl` does not prescribe a physical folder
+layout. A version-1 schema is prototyped in the
 [project-contract package](../../platform/python/project-contract/README.md);
 the organization-wide descriptor contract remains open.
 
@@ -50,6 +53,38 @@ the organization-wide descriptor contract remains open.
   ecosystem-native resolution and lockfile behavior.
 - `Python 3.10` was an example, not an approved baseline. Select supported
   versions per ecosystem before building team templates.
+
+## Unified project commands and application scopes
+
+Contributors should have one platform command interface for common project
+operations, provisionally illustrated as:
+
+```text
+strato obt build feds/ors/etl
+strato obt test feds/ors/etl
+strato obt run feds/ors/etl --app controlDataRegistration
+```
+
+This is one command surface, not a replacement build engine: Nx remains the
+orchestrator and language-native tools perform the actual build, test, and run
+work. The project argument resolves to a registered project identity; the
+example path is illustrative, and its mapping to the eventual team/project
+layout remains to be defined.
+
+Each module declares its runnable applications in a module-scoped `.runconf`
+file using HCL syntax. Each application names an existing Nx target. Build and
+test operate at project scope. Run targets an application through `--app`; the
+project ID may be used without that option when exactly one application is
+declared.
+
+Application settings may include language-specific entrypoints such as an
+optional JVM `mainClass`, omitted when not applicable. Container support is an
+explicit opt-in to a platform-owned profile such as `DockerEnabled`, not parent
+inheritance or a project-maintained Dockerfile. The initial HCL contract uses
+`target`, optional `mainClass`, and optional list-valued `profiles`; profiles
+are declared as values rather than with an imperative `+=` expression. OCI
+profile execution remains part of the later runtime-platform work. See the
+[OBT tool guide](../../tools/javascript/obt/README.md) for the local prototype.
 
 ## Project releases and artifacts
 

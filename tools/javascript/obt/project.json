@@ -1,0 +1,26 @@
+{
+  "name": "strato-obt",
+  "projectType": "application",
+  "tags": ["team:platform", "language:javascript", "product-type:cli"],
+  "metadata": {
+    "contractVersion": 1,
+    "team": "platform",
+    "projectId": "platform/obt",
+    "productType": "cli",
+    "language": "javascript",
+    "toolchainProfile": "node-local",
+    "release": {
+      "versioning": "semver",
+      "artifactProfile": "npm-package"
+    }
+  },
+  "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node --test",
+        "cwd": "{projectRoot}"
+      }
+    }
+  }
+}

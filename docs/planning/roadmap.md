@@ -13,7 +13,7 @@ team capacity, provider decisions, and validated acceptance criteria.
 | Phase | Outcome | Epics | Exit evidence |
 |---|---|---|---|
 | 0. Standards and foundation | Approved backlog, governed workspaces, ownership, baseline tooling | `EPIC-monorepo-foundation` | Nx lists the local FastAPI project; uv resolves its workspace; build/lint/typecheck/test and `/healthz` pass locally |
-| 1. Polyglot graph and CI | Team-owned projects, transitive impact analysis, transparent local-first PR checks | `EPIC-polyglot-build`, `EPIC-secure-delivery` | Direct and transitive affected sets are tested; CI evidence explains selected, blocked, and skipped scopes |
+| 1. Polyglot graph and CI | Team-owned projects, a unified local project command interface, transitive impact analysis, transparent local-first PR checks | `EPIC-polyglot-build`, `EPIC-secure-delivery` | Direct and transitive affected sets are tested; project build/test and application run use the standard CLI; CI evidence explains selected, blocked, and skipped scopes |
 | 2. Runtime and deployment platform | Project-type release artifacts and optional platform-built OCI images, with GitOps desired state | `EPIC-runtime-platform` | Local artifact and GitOps workflows are reproducible; any cloud environment is separately justified and approved |
 | 3. Reliability and operations | Service telemetry, SLOs, alerting, runbooks, incident feedback | `EPIC-observability-reliability` | A vertical-slice service has dashboards, actionable alerts, SLO evidence, and exercised recovery |
 | 4. Developer experience | Catalog, golden paths, standard local environment | `EPIC-developer-experience` | A team can scaffold and operate a governed service using the approved golden path |
@@ -61,12 +61,14 @@ The first vertical slice must remain deliberately small:
 1. Define the team/project descriptor and ownership contract.
 2. Register a representative project and its direct and transitive shared
    dependencies in Nx.
-3. Run focused build and test tasks locally and expose their scope and evidence.
-4. Validate project release artifacts locally; keep OCI packaging opt-in and
+3. Provide a standard local CLI for project build/test and declared application
+   run scopes; validate module-scoped `.runconf` files.
+4. Run focused tasks locally and expose their scope and evidence.
+5. Validate project release artifacts locally; keep OCI packaging opt-in and
    platform-owned.
-5. Keep desired environment state in Git; defer environment deployment until a
+6. Keep desired environment state in Git; defer environment deployment until a
    local or approved runtime is in scope.
-6. Document measured gaps before adding hosted services, cloud, or more language
+7. Document measured gaps before adding hosted services, cloud, or more language
    and service coverage.
 
 For the current personal prototype, the first slice is a minimal Python FastAPI

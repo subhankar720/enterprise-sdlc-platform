@@ -74,7 +74,7 @@ gitops/           Argo CD and environment definitions
 security/         threat models, policies, and compliance
 observability/    dashboards, alerts, SLOs, and runbooks
 docs/             standards, planning, ADRs, and skills
-tools/            Nx plugins and repository automation
+tools/            platform CLI tools, Nx plugins, and repository automation
 scripts/          bootstrap and maintenance automation
 tests/            cross-service test suites
 ```

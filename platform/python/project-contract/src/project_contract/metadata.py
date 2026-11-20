@@ -40,9 +40,9 @@ def load_project_metadata(project_file: str | Path) -> dict[str, object]:
         raise ProjectMetadataError(f"{path}: invalid project metadata: {details}")
 
     project_name = document.get("name")
-    if not isinstance(project_name, str) or metadata["projectId"] != project_name:
+    if not isinstance(project_name, str) or not project_name:
         raise ProjectMetadataError(
-            f"{path}: metadata.projectId must match the Nx project name"
+            f"{path}: Nx project name must be a non-empty string"
         )
 
     return metadata

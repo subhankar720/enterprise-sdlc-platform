@@ -10,6 +10,8 @@ Start with the proposed [implementation roadmap](roadmap.md), review the
 [team-oriented platform vision](vision.md), and check
 [unresolved assumptions](assumptions.md) before approving work. The
 [standard charter](../standard-charter.md) governs the lifecycle and quality bar.
+New contributors can start with the
+[Platform Manager Learning Guide](../learning/README.md).
 
 ## Required records
 

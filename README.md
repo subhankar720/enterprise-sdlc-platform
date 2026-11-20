@@ -17,6 +17,7 @@ cross-language build orchestrator and native toolchains for each language.
 
 The architecture principles and implementation requirements are documented in:
 
+- [Platform Manager Learning Guide](docs/learning/README.md)
 - [Enterprise SDLC Standard Charter](docs/standard-charter.md)
 - [Team-oriented, local-first platform vision](docs/planning/vision.md)
 - [Implementation roadmap](docs/planning/roadmap.md)
@@ -67,7 +68,7 @@ gitops/           GitOps applications and environment promotion
 security/         Policies, threat models, and compliance
 observability/    Dashboards, alerts, SLOs, and runbooks
 docs/             Architecture, planning, decisions, and skills
-tools/            Nx plugins and repository automation
+tools/            platform CLI tools, Nx plugins, and repository automation
 scripts/          Bootstrap and maintenance automation
 tests/            Cross-service contract, E2E, performance, and chaos tests
 .github/          GitHub workflows and repository governance
@@ -90,6 +91,22 @@ pnpm pr:local -- --files=platform/python/project-contract/src/project_contract/m
 ```
 
 Reports and per-project logs stay under the ignored `.local-reports/` directory.
+
+## Unified project commands
+
+The local OBT prototype provides one command surface over Nx targets and native
+language tools:
+
+```powershell
+pnpm strato obt build example/fastapi-service
+pnpm strato obt test example/fastapi-service
+pnpm strato obt run example/fastapi-service
+```
+
+Project IDs come from `metadata.projectId`. Applications are declared in a
+module-scoped HCL `.runconf`; use `--app <name>` when a module declares multiple
+applications. See the [OBT tool guide](tools/javascript/obt/README.md) for the
+initial configuration contract and current limitations.
 
 ## Working with the repository
 

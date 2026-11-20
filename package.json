@@ -4,9 +4,11 @@
   "private": true,
   "packageManager": "pnpm@12.21.0",
   "scripts": {
-    "pr:local": "node scripts/local-pr-report.mjs"
+    "pr:local": "node scripts/local-pr-report.mjs",
+    "strato": "node tools/javascript/obt/src/cli.mjs"
   },
   "devDependencies": {
+    "@enterprise-sdlc-platform/obt": "workspace:*",
     "nx": "24.0.6"
   }
 }

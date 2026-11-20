@@ -12,12 +12,13 @@ branch/base refs, and affected consumers before changing graph behavior.
 
 ## Current repository readiness
 
-At the last local check, Nx v24.0.6 is pinned locally and discovers four
-projects. The original FastAPI project and the three-project Python graph proof
-pass build, lint, typecheck, and test. Changing the platform contract selects
-the shared library and service transitively; `pnpm pr:local` records final
-statuses and per-project logs. The Go plugin reference was removed until a
-plugin implementation exists.
+At the last local check, Nx v24.0.6 is pinned locally and discovers five
+projects, including the OBT CLI. The original FastAPI project and the
+three-project Python graph proof pass build, lint, typecheck, and test. The OBT
+unit tests pass, and its local build/test/run commands dispatch to Nx targets.
+Changing the platform contract selects the shared library and service
+transitively; `pnpm pr:local` records final statuses and per-project logs. The
+Go plugin reference was removed until a plugin implementation exists.
 
 The repository has a base commit. Both explicit-file selection and a
 Git-base-based affected run have been validated; the platform source change
@@ -54,6 +55,9 @@ pnpm exec nx graph
 pnpm exec nx show project <project-name> --json
 pnpm exec nx affected -t test --base=<valid-base-ref> --head=<valid-head-ref>
 pnpm pr:local -- --files=platform/python/project-contract/src/project_contract/metadata.py
+pnpm strato obt build <project-id>
+pnpm strato obt test <project-id>
+pnpm strato obt run <project-id> [--app <application-name>]
 ```
 
 Use the repository-pinned pnpm/Nx versions. Do not hardcode `main` or

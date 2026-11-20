@@ -28,7 +28,8 @@ Platform Engineering, with language-domain owners
 ## Scope
 
 Nx project graph, graph inference, native executors, target conventions, cache
-inputs, graph auditing, and affected-detection tests.
+inputs, graph auditing, affected-detection tests, and a unified project command
+interface with module-scoped application configuration.
 
 ## Constraints
 
@@ -50,3 +51,4 @@ safe selective CI at monorepo scale.
 - F-polyglot-build-002: Native language targets
 - F-polyglot-build-003: Affected detection and cache correctness
 - F-polyglot-build-004: Graph audit and onboarding
+- F-polyglot-build-005: Unified project commands and application scopes
