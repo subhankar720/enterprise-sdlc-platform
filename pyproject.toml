@@ -1,0 +1,42 @@
+[project]
+name = "enterprise-sdlc-platform"
+version = "0.1.0"
+description = "Enterprise SDLC Lifecycle Managed Monorepo"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary" }
+authors = [
+    { name = "Platform Engineering", email = "platform@example.com" },
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["apps/backend/*", "shared-libs/python/*", "tools/python/*"]
+
+[tool.uv.sources]
+# Workspace members resolve via uv workspace protocol.
+# External deps are pinned by uv lock.
+
+[tool.uv-build]
+# No root package build; workspace members build themselves.
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = "-ra --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true

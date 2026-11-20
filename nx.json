@@ -1,0 +1,56 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "packageManager": "pnpm",
+  "defaultBase": "master",
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/dist", "{projectRoot}/build"]
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "lint": {
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "typecheck": {
+      "inputs": ["default", "^production"],
+      "cache": true
+    },
+    "publish": {
+      "dependsOn": ["build", "test"],
+      "cache": false
+    },
+    "deploy": {
+      "cache": false
+    },
+    "serve": {
+      "cache": false
+    }
+  },
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [
+      "{workspaceRoot}/nx.json",
+      "{workspaceRoot}/package.json",
+      "{workspaceRoot}/pnpm-lock.yaml",
+      "{workspaceRoot}/pnpm-workspace.yaml",
+      "{workspaceRoot}/pyproject.toml",
+      "{workspaceRoot}/uv.lock"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/tests/**/*",
+      "!{projectRoot}/**/test_*.py",
+      "!{projectRoot}/**/*_test.py",
+      "!{projectRoot}/**/*.{test,spec}.*",
+      "!{projectRoot}/**/coverage/**/*",
+      "!{projectRoot}/**/dist/**/*",
+      "!{projectRoot}/**/build/**/*",
+      "!{projectRoot}/**/node_modules/**/*"
+    ]
+  }
+}

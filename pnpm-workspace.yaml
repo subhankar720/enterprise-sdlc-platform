@@ -1,0 +1,7 @@
+packages:
+  - "apps/*/*"
+  - "shared-libs/*/*"
+  - "tools/*/*"
+
+allowBuilds:
+  nx: true

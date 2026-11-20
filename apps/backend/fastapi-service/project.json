@@ -1,0 +1,44 @@
+{
+  "name": "python-fastapi-service",
+  "projectType": "application",
+  "tags": ["language:python", "type:application", "lifecycle:prototype"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv build --package python-fastapi-service --out-dir dist",
+        "cwd": "{projectRoot}"
+      },
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package python-fastapi-service pytest tests -ra --strict-markers",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package python-fastapi-service ruff check src tests",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package python-fastapi-service mypy src",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "uv run --package python-fastapi-service uvicorn health_api.main:app --reload --host 127.0.0.1 --port 8000",
+        "cwd": "{projectRoot}"
+      },
+      "cache": false
+    }
+  }
+}

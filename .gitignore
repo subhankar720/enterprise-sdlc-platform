@@ -1,0 +1,88 @@
+# ──────────────────────────────────────────────────────────────
+# enterprise-sdlc-platform .gitignore
+# Generated from Enterprise SDLC Blueprint §1.4
+# ──────────────────────────────────────────────────────────────
+
+# Build artefacts
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+dist-*/
+*.jar
+*.war
+*.ear
+
+# Node / pnpm
+node_modules/
+.pnpm-store/
+.pnpm-debug.log
+*.tsbuildinfo
+.next/
+.nuxt/
+coverage/
+.nyc_output/
+
+# Python / uv
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+.python-version
+
+# Go
+*.exe
+*.test
+*.out
+coverage.out
+go.sum.bak
+
+# Gradle
+.gradle/
+build/
+gradle/.gradle
+
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Secrets & env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+secrets/
+*.keystore
+*.jks
+
+# Nx
+.nx/
+.nx-cache/
+
+# Docker
+Dockerfile.*.bak
+
+# Logs
+*.log
+logs/
+
+# Temporary
+tmp/
+temp/
+*.tmp
